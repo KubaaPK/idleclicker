@@ -1,0 +1,64 @@
+.error {
+  background-color: red; }
+
+body {
+  overflow: hidden;
+  background-color: #000000; }
+  body button {
+    cursor: pointer; }
+    body button:focus, body button:active {
+      outline: none; }
+  body .topbar {
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #006400; }
+    body .topbar #coinsAmount {
+      position: relative;
+      top: 50px;
+      font-size: 5rem;
+      margin-left: 10%; }
+  body .shop {
+    width: 20%;
+    height: calc(100vh - 50px);
+    position: absolute;
+    right: 0;
+    top: 50px; }
+    body .shop button {
+      width: 100%;
+      height: calc(100vh/7.2);
+      display: block;
+      margin: 3% 0;
+      position: relative;
+      right: 0%;
+      transition: 0.1s;
+      background-color: transparent;
+      border: 2px solid #006400;
+      color: #006400;
+      text-transform: uppercase;
+      transition: 0.3s; }
+      body .shop button:hover {
+        position: relative;
+        right: 20%;
+        transition: 0.1s;
+        -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75); }
+  body #addCoin {
+    position: absolute;
+    left: 30%;
+    top: 24vh;
+    border: 0;
+    background-color: transparent;
+    color: #006400;
+    font-size: 20rem;
+    height: 300px;
+    width: 300px;
+    transition: 0.1s; }
+    body #addCoin:hover {
+      transform: scale(1.1);
+      transition: 0.1s; }
+
+/*# sourceMappingURL=style.css.map */
