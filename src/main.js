@@ -1,8 +1,8 @@
 'use strict'
 class Game{
   constructor(){
-    this.coins = 250;
-    this.workers = [0,0];
+    this.coins = 250000;
+    this.workers = [0,0,0,0,0,0];
     setInterval(()=>{this.tick();}, 1000);
 
   }
@@ -10,11 +10,18 @@ class Game{
 
 
   tick(){
-    //console.log('coins: ' +this.coins + ' workers: ' +this.workers[0] + ' machines: ' + this.workers[1]);
     document.getElementById('coinsAmount').innerHTML = '$' +Math.floor(this.coins);
 
-    let coinspersec = Math.floor(this.workers[0]+this.workers[1]*3);
-    document.getElementById('coinspersec').innerHTML = '$'+Math.floor(this.workers[0]+this.workers[1]*3)+'/sec';
+    let coinspersec = Math.floor(
+      this.workers[0]*shop.avaiable[0].production +
+      this.workers[1]*shop.avaiable[1].production +
+      this.workers[2]*shop.avaiable[2].production +
+      this.workers[3]*shop.avaiable[3].production +
+      this.workers[4]*shop.avaiable[4].production +
+      this.workers[5]*shop.avaiable[5].production
+    );
+
+    document.getElementById('coinspersec').innerHTML = '$'+coinspersec+'/sec';
 
     this.coins += coinspersec;
   }
@@ -25,25 +32,21 @@ class Game{
 
     addcoinBtn.addEventListener('click', () => {
       this.coins++;
-    });
-
+  });
 
   }
-
-
-
-
-
-
 }
 
 class Shop {
   constructor() {
     this.avaiable = [
 
-    {name: 'worker', production: 1, price: 25},
-    {name: 'machine', production: 3, price: 100}
-
+      {name: 'salesman', production: 1, price: 50},
+      {name: 'lemonadestand', production: 5, price: 250},
+      {name: 'greengrocers', production: 20, price: 1000},
+      {name: 'shop', production: 100, price: 5000},
+      {name: 'supermarket', production: 250, price: 25000},
+      {name: 'corporation', production: 500, price: 100000}
     ];
   }
 
@@ -51,7 +54,7 @@ class Shop {
     if(this.avaiable[itemId].price <= game.coins){
       game.workers[itemId]++;
       game.coins-=this.avaiable[itemId].price;
-      this.avaiable[itemId].price = this.avaiable[itemId].price + this.avaiable[itemId].price*0.3;
+      this.avaiable[itemId].price = this.avaiable[itemId].price + this.avaiable[itemId].price*0.6;
       return true;
     }else{
       document.getElementById('coinsAmount').classList.add('error');
@@ -63,46 +66,34 @@ class Shop {
 
   buyWorkers() {
 
-    //buying btns
-    let buyworkerBtn = document.getElementById('buyworkerBtn'),
-        buymachineBtn = document.getElementById('buymachineBtn');
+    //btns
+
+    let shopnames = ['salesman', 'lemonadestand', 'greengrocers', 'shop', 'supermarket', 'corporation'],
+      buyingbtn = [],
+      amounts = [],
+      costs = [];
 
 
-    //displaying amounts
-    let workerAmount = document.getElementById('workeramount'),
-        machineAmount = document.getElementById('machineamount');
+    for ( let i = 0; i<shopnames.length; i++ ) {
 
+      buyingbtn[i] = document.getElementById('buy'+shopnames[i]+'Btn');
+      amounts[i] = document.getElementById(shopnames[i]+'amount');
+      costs[i] = document.getElementById(shopnames[i]+'cost');
 
-    //displaying costs
-    let workercost = document.getElementById('workercost'),
-        machinecost = document.getElementById('machinecost');
-
-
-    //initial
-    workerAmount.innerText = 0;
-    machineAmount.innerText = 0;
-
-    workercost.innerText = this.avaiable[0].price;
-    machinecost.innerText = this.avaiable[1].price;
-
-
-
-
-    buyworkerBtn.addEventListener('click', ()=> {
-      shop.buy(0);
-      workerAmount.innerText = '#' +game.workers[0];
-      workercost.innerText = Math.floor(this.avaiable[0].price);
+      buyingbtn[i].addEventListener('click', () =>{
+        shop.buy(i);
+      amounts[i].innerText = '#' +game.workers[i];
+      costs[i].innerText = Math.floor(this.avaiable[i].price);
     });
+    }
 
-    buymachineBtn.addEventListener('click', ()=> {
 
-      shop.buy(1);
-      machineAmount.innerText = '#' +game.workers[1];
-      machinecost.innerText = Math.floor(this.avaiable[1].price);
-    });
+    for ( let i = 0; i<shopnames.length; i++ ) {
+      amounts[i].innerText = '#'+0;
+      costs[i].innerText = this.avaiable[i].price;
+    }
+
   }
-
-
 }
 
 
@@ -110,11 +101,8 @@ class Shop {
 
 
 let game = new Game(),
-    shop = new Shop();
+  shop = new Shop();
 
 
 game.addCoin(1);
 shop.buyWorkers();
-
-
-
