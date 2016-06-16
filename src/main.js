@@ -73,7 +73,6 @@ class Game{
   }//tick()
 
 
-
   addCoin(clickPower) {
 
     let addcoinBtn = document.getElementById('addCoin');
@@ -81,7 +80,7 @@ class Game{
     addcoinBtn.addEventListener('click', () => {
       this.coins++;
 
-      
+
   });
 
   }
