@@ -1,11 +1,56 @@
 'use strict'
 class Game{
   constructor(){
+
+   // this.initialGame();
+
     this.coins = parseInt(localStorage.getItem("coins"));
-    this.workers = [0,0,0,0,0,0];
+    let workersparsejson = JSON.parse(localStorage.getItem("workers"));
+    this.workers = [workersparsejson[0].amount,workersparsejson[1].amount,workersparsejson[2].amount,workersparsejson[3].amount,workersparsejson[4].amount,workersparsejson[5].amount];
+
     setInterval(()=>{this.tick();}, 1000);
+
+
   }
 
+  initialGame() {
+    let workerstosave = [
+      {
+        name: 'salesman',
+        amount: 0,
+        cost: 50
+      },
+      {
+        name: 'lemonadestand',
+        amount: 0,
+        cost: 250
+      },
+      {
+        name: 'greengrocers',
+        amount: 0,
+        cost: 1000
+      },
+      {
+        name: 'shop',
+        amount: 0,
+        cost: 5000
+      },
+      {
+        name: 'supermarket',
+        amount: 0,
+        cost: 25000
+      },
+      {
+        name: 'corporation',
+        amount: 0,
+        cost: 100000
+      }
+    ];
+
+    let workersjson = JSON.stringify(workerstosave);
+    localStorage.setItem("workers", workersjson);
+  }
+  
   tick(){
     document.getElementById('coinsAmount').innerHTML = '$' +Math.floor(this.coins);
 
@@ -24,7 +69,44 @@ class Game{
     this.coins += coinspersec;
 
 
-  }
+    let workerstosave = [
+      {
+        name: 'salesman',
+        amount: this.workers[0],
+        cost: shop.avaiable[0].price
+      },
+      {
+        name: 'lemonadestand',
+        amount: this.workers[1],
+        cost: shop.avaiable[1].price
+      },
+      {
+        name: 'greengrocers',
+        amount: this.workers[2],
+        cost: shop.avaiable[2].price
+      },
+      {
+        name: 'shop',
+        amount: this.workers[3],
+        cost: shop.avaiable[3].price
+      },
+      {
+        name: 'supermarket',
+        amount: this.workers[4],
+        cost: shop.avaiable[4].price
+      },
+      {
+        name: 'corporation',
+        amount: this.workers[5],
+        cost: shop.avaiable[5].price
+      }
+    ];
+
+
+    let workersjson = JSON.stringify(workerstosave);
+    localStorage.setItem("workers", workersjson);
+
+  }//tick()
 
 
 
@@ -39,7 +121,7 @@ class Game{
   });
 
   }
-} //end of game class
+} //class Game
 
 class Shop {
   constructor() {
@@ -118,12 +200,13 @@ class Shop {
 
 
     for ( let i = 0; i<shopnames.length; i++ ) {
-      amounts[i].innerText = '#'+0;
-      costs[i].innerText = this.avaiable[i].price;
+      let workersparsejson = JSON.parse(localStorage.getItem("workers"));
+      amounts[i].innerText = '#'+ workersparsejson[i].amount;
+      costs[i].innerText = workersparsejson[i].cost;
     }
 
   }
-} //end of shop class
+} // class Shop
 
 
 
@@ -134,5 +217,6 @@ let game = new Game(),
 
 
 game.addCoin(1);
+
 shop.buyWorkers();
 
