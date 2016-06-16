@@ -1,12 +1,11 @@
 'use strict'
 class Game{
   constructor(){
-    this.coins = 250000;
+    this.coins = parseInt(localStorage.getItem("coins"));
     this.workers = [0,0,0,0,0,0];
     setInterval(()=>{this.tick();}, 1000);
-
   }
-  
+
   tick(){
     document.getElementById('coinsAmount').innerHTML = '$' +Math.floor(this.coins);
 
@@ -21,8 +20,13 @@ class Game{
 
     document.getElementById('coinspersec').innerHTML = '$'+coinspersec+'/sec';
 
+    localStorage.setItem("coins", this.coins);
     this.coins += coinspersec;
+
+
   }
+
+
 
   addCoin(clickPower) {
 
@@ -30,15 +34,16 @@ class Game{
 
     addcoinBtn.addEventListener('click', () => {
       this.coins++;
+
+
   });
 
   }
-}
+} //end of game class
 
 class Shop {
   constructor() {
     this.avaiable = [
-
       {
         name: 'salesman',
         production: 1,
@@ -118,7 +123,7 @@ class Shop {
     }
 
   }
-}
+} //end of shop class
 
 
 
