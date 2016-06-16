@@ -2,55 +2,19 @@
 class Game{
   constructor(){
 
-   // this.initialGame();
+
+    let workersparsejson = JSON.parse(localStorage.getItem("workers") || '[{"name":"salesman","amount":0,"cost":50},{"name":"lemonadestand","amount":0,"cost":250},{"name":"greengrocers","amount":0,"cost":1000},{"name":"shop","amount":0,"cost":5000},{"name":"supermarket","amount":0,"cost":25000},{"name":"corporation","amount":0,"cost":100000}]');
 
     this.coins = parseInt(localStorage.getItem("coins"));
-    let workersparsejson = JSON.parse(localStorage.getItem("workers"));
     this.workers = [workersparsejson[0].amount,workersparsejson[1].amount,workersparsejson[2].amount,workersparsejson[3].amount,workersparsejson[4].amount,workersparsejson[5].amount];
 
     setInterval(()=>{this.tick();}, 1000);
 
+    console.log(workersparsejson);
+    console.log(this.coins);
 
   }
 
-  initialGame() {
-    let workerstosave = [
-      {
-        name: 'salesman',
-        amount: 0,
-        cost: 50
-      },
-      {
-        name: 'lemonadestand',
-        amount: 0,
-        cost: 250
-      },
-      {
-        name: 'greengrocers',
-        amount: 0,
-        cost: 1000
-      },
-      {
-        name: 'shop',
-        amount: 0,
-        cost: 5000
-      },
-      {
-        name: 'supermarket',
-        amount: 0,
-        cost: 25000
-      },
-      {
-        name: 'corporation',
-        amount: 0,
-        cost: 100000
-      }
-    ];
-
-    let workersjson = JSON.stringify(workerstosave);
-    localStorage.setItem("workers", workersjson);
-  }
-  
   tick(){
     document.getElementById('coinsAmount').innerHTML = '$' +Math.floor(this.coins);
 
@@ -117,7 +81,7 @@ class Game{
     addcoinBtn.addEventListener('click', () => {
       this.coins++;
 
-
+      
   });
 
   }
