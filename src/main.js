@@ -1,6 +1,7 @@
 'use strict'
 class Game{
   constructor(){
+<<<<<<< HEAD
 
 
     let workersparsejson = JSON.parse(localStorage.getItem("workers") || '[{"name":"salesman","amount":0,"cost":50},{"name":"lemonadestand","amount":0,"cost":250},{"name":"greengrocers","amount":0,"cost":1000},{"name":"shop","amount":0,"cost":5000},{"name":"supermarket","amount":0,"cost":25000},{"name":"corporation","amount":0,"cost":100000}]');
@@ -8,6 +9,10 @@ class Game{
     this.coins = parseInt(localStorage.getItem("coins") || 'coins: 0');
     this.workers = [workersparsejson[0].amount,workersparsejson[1].amount,workersparsejson[2].amount,workersparsejson[3].amount,workersparsejson[4].amount,workersparsejson[5].amount];
 
+=======
+    this.coins = 250000;
+    this.workers = [0,0,0,0,0,0];
+>>>>>>> master
     setInterval(()=>{this.tick();}, 1000);
 
 
@@ -18,12 +23,21 @@ class Game{
     document.getElementById('coinsAmount').innerHTML = '$' +Math.floor(this.coins);
 
     let coinspersec = Math.floor(
+<<<<<<< HEAD
       this.workers[0]*shop.avaiableWorkers[0].production+
       this.workers[1]*shop.avaiableWorkers[1].production+
       this.workers[2]*shop.avaiableWorkers[2].production+
       this.workers[3]*shop.avaiableWorkers[3].production+
       this.workers[4]*shop.avaiableWorkers[4].production+
       this.workers[5]*shop.avaiableWorkers[5].production
+=======
+      this.workers[0]*shop.avaiable[0].production +
+      this.workers[1]*shop.avaiable[1].production +
+      this.workers[2]*shop.avaiable[2].production +
+      this.workers[3]*shop.avaiable[3].production +
+      this.workers[4]*shop.avaiable[4].production +
+      this.workers[5]*shop.avaiable[5].production
+>>>>>>> master
     );
 
     document.getElementById('coinspersec').innerHTML = '$'+coinspersec+'/sec';
@@ -65,6 +79,7 @@ class Game{
       }
     ];
 
+<<<<<<< HEAD
 
     let workersjson = JSON.stringify(workerstosave);
     localStorage.setItem("workers", workersjson);
@@ -132,6 +147,25 @@ class Shop {
         price: 500,
         clickpower: 3
       }
+=======
+    addcoinBtn.addEventListener('click', () => {
+      this.coins++;
+    });
+    
+  }
+}
+
+class Shop {
+  constructor() {
+    this.avaiable = [
+
+    {name: 'salesman', production: 1, price: 50},
+    {name: 'lemonadestand', production: 5, price: 250},
+    {name: 'greengrocers', production: 20, price: 1000},
+    {name: 'shop', production: 100, price: 5000},
+    {name: 'supermarket', production: 250, price: 25000},
+    {name: 'corporation', production: 500, price: 100000}
+>>>>>>> master
     ];
 
 
@@ -142,8 +176,13 @@ class Shop {
   buyWorker(itemId){
     if(this.avaiableWorkers[itemId].price <= game.coins){
       game.workers[itemId]++;
+<<<<<<< HEAD
       game.coins-=this.avaiableWorkers[itemId].price;
       this.avaiableWorkers[itemId].price = this.avaiableWorkers[itemId].price + this.avaiableWorkers[itemId].price*0.6;
+=======
+      game.coins-=this.avaiable[itemId].price;
+      this.avaiable[itemId].price = this.avaiable[itemId].price + this.avaiable[itemId].price*0.6;
+>>>>>>> master
       return true;
     }else{
       document.getElementById('coinsAmount').classList.add('error');
@@ -164,10 +203,19 @@ class Shop {
     }
   }
 
+<<<<<<< HEAD
 
   buyWorkers() {
 
     //btns
+=======
+    //btns
+
+    let shopnames = ['salesman', 'lemonadestand', 'greengrocers', 'shop', 'supermarket', 'corporation'],
+        buyingbtn = [],
+        amounts = [],
+        costs = [];
+>>>>>>> master
 
     let shopnames = ['salesman', 'lemonadestand', 'greengrocers', 'shop', 'supermarket', 'corporation'],
         buyingbtn = [],
@@ -175,6 +223,7 @@ class Shop {
         costs = [];
 
     for ( let i = 0; i<shopnames.length; i++ ) {
+<<<<<<< HEAD
 
       buyingbtn[i] = document.getElementById('buy'+shopnames[i]+'Btn');
       amounts[i] = document.getElementById(shopnames[i]+'amount');
@@ -212,6 +261,28 @@ class Shop {
 
 
 } // class Shop
+=======
+
+      buyingbtn[i] = document.getElementById('buy'+shopnames[i]+'Btn');
+      amounts[i] = document.getElementById(shopnames[i]+'amount');
+      costs[i] = document.getElementById(shopnames[i]+'cost');
+
+      buyingbtn[i].addEventListener('click', () =>{
+        shop.buy(i);
+        amounts[i].innerText = '#' +game.workers[i];
+        costs[i].innerText = Math.floor(this.avaiable[i].price);
+      });
+    }
+
+
+    for ( let i = 0; i<shopnames.length; i++ ) {
+      amounts[i].innerText = '#'+0;
+      costs[i].innerText = this.avaiable[i].price;
+    }
+
+  }
+}
+>>>>>>> master
 
 
 
