@@ -1,10 +1,5 @@
 # idleclicker 
 
-Project base on es6 in cooperation with webpack.
+Project on es6 with webpack.
 
-
-DONE:
-  - click to add coin,
-  - add coins over time by buying some sort of coins factories (salesman, lemonade stand etc.)
-  - saving and loading data from localStorage - such as total coins amount, factories amounts etc.
-
+Simple idle clicker. You can add coins by clicking, buy factories to produce coins per second and buyupgrades. Everything is saved and loaded from localStorage.  
