@@ -126,6 +126,11 @@ class Shop {
         name: 'doubleclick',
         price: 100,
         clickpower: 2
+      },
+      {
+        name: 'tripleclick',
+        price: 500,
+        clickpower: 3
       }
     ];
 
