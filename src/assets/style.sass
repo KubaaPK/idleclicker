@@ -43,7 +43,7 @@ body
 
   .shop
     width: 20%
-    height: calc(100vh - 50px)
+    height: 100vh
 
     position: absolute
     right: 0
@@ -68,17 +68,19 @@ body
       color: #006400
 
       text-transform: uppercase
+      letter-spacing: 2px
 
       transition: 0.3s
 
       &:hover
         position: relative
-        right: 20%
         transition: 0.1s
 
-        -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75)
-        -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75)
-        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75)
+        background-color: $green
+        color: #ffffff
+
+        letter-spacing: 3px
+
 
 
   #addCoin
@@ -100,3 +102,29 @@ body
     &:hover
       transform: scale(1.1)
       transition: 0.1s
+
+
+  .upgrades
+    button
+      height: 75px
+      width: 75px
+
+      position: absolute
+      bottom: 10px
+
+      background-color: transparent
+      border: 2px solid $green
+      color: $green
+
+      text-transform: uppercase
+      letter-spacing: 2px
+
+      transition: 0.2s
+
+      &:hover
+        background-color: $green
+        color: #ffffff
+
+        letter-spacing: 3px
+
+        transition: 0.2s
